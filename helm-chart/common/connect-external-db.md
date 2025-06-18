@@ -53,7 +53,7 @@ kubectl create configmap sonar-configmap -n sonarqube \
 ```
 
 Then, the ConfigMap must be referenced in the Helm chart's `extraConfig.configmaps` parameter:
-```
+```yaml
 extraConfig:
   secrets: []
   configmaps:
