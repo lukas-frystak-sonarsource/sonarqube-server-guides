@@ -11,4 +11,4 @@ Table of contents:
 - Common
 - `sonarqube` chart
 - `sonarqube-dce` chart
-- [Secure the communication within the cluster](dce/secure-communication.md)
+  - [Secure the communication within the cluster](dce/secure-communication.md)
