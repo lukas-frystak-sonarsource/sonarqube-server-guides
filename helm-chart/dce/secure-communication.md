@@ -99,3 +99,17 @@ The secure communication between SonarQube application and search node is enable
   - Alternatively, the password can be set from a secret: `searchNodes.searchAuthentication.keyStorePasswordSecret`
 - Set `searchNodes.searchAuthentication.userPassword` to any value
 - Set `nodeEncryption.enabled` to `true`
+
+### Verify the secure communication is enabled
+
+If the configuration is correct, the cluster will start up without errors. If it does start, the following log messsages confirm the secure communication was enabled:
+
+- Search pod logs
+  ```
+  2025.06.18 05:41:04 INFO  sonarqube-rel-sonarqube-dce-search-0 es[][o.e.x.s.Security] Security is enabled
+  ```
+- App pod logs
+  ```
+  2025.06.17 10:22:48 INFO  sonarqube-rel-sonarqube-dce-app-77988d8787-4hxzb web[][o.s.s.e.EsClientProvider] Connected to remote Elasticsearch: [https://sonarqube-rel-sonarqube-dce-search:9001]
+  ```
+  Note: the HTTPS in the ES URL.
