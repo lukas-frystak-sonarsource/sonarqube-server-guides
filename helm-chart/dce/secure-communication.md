@@ -102,7 +102,7 @@ The secure communication between SonarQube application and search node is enable
 
 ### Verify the secure communication is enabled
 
-If the configuration is correct, the cluster will start up without errors. If it does start, the following log messsages confirm the secure communication was enabled:
+If the configuration is correct, the cluster will start up without errors. If it does start, the following log messsages confirm the secure communication was enabled.
 
 - Search pod logs
   ```
