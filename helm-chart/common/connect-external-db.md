@@ -1,0 +1,1 @@
+# Connect SonarQube to an external database

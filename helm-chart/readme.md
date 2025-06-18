@@ -9,6 +9,7 @@ the guides and examples are structured in the following way:
 
 Table of contents:
 - Common
+  - [Connect SonarQube to an external database](common/connect-external-db.md)
 - `sonarqube` chart
 - `sonarqube-dce` chart
   - [Secure the communication within the cluster](dce/secure-communication.md)
