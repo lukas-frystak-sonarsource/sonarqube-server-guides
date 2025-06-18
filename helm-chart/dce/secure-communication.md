@@ -4,6 +4,8 @@ This page describes how to enable and configure secure communication on SonarQub
 
 In this context, secure communication means encrypting the communication between the application and search nodes. Once the feature is enabled, the ElasticSearch cluster is accessed via HTTPS as opposed to the default HTTP access.
 
+While the configuration is documented in the SonarQube Server helm chart repository [here](https://github.com/SonarSource/helm-chart-sonarqube/tree/master/charts/sonarqube-dce#secure-the-communication-within-the-cluster), this page aims to provide more structured steps and a complete example.
+
 > [!NOTE]
 > As with many things related to Kubernetes, there are many different ways of doing everything. This page provides complete instructions, but should still be treated as an example. The steps needs to be adapted to the specific environment where the steps are being applied.
 
