@@ -44,3 +44,11 @@ Or in the heml upgrade/install command:
 ```
 helm upgrade --install ... --set setAdminPassword.passwordSecretName=admin-password-secret-name ...
 ```
+
+> [!TIP]
+> Keep in mind the new password must meet SonarQube Server password complexity requirements:
+> - 12 characters
+> - 1 upper case letter
+> - 1 lower case letter
+> - 1 number
+> - 1 special character
