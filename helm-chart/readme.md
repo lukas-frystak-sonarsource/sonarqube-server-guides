@@ -9,6 +9,7 @@ the guides and examples are structured in the following way:
 
 Table of contents:
 - Common
+  - [When to deploy SQS on Kubernetes (and when not)](common/when-to-deploy-on-k8s.md)
   - [Connect SonarQube to an external database](common/connect-external-db.md)
   - [Download SonarQube images from a private repository](common/images-from-private-repo.md)
 - `sonarqube` chart
