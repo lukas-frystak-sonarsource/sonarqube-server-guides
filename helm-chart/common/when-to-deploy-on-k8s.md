@@ -1,6 +1,6 @@
 # When to deploy SQS on Kubernetes (and when not)
 
-Deploying SonarQube Server on a Kubernetes cluster via the official Helm charts is a fully supported and increasingly common approach, offering significant advantages for organizations with mature infrastructure. This method enables standardized, automated deployments.
+Deploying SonarQube Server on a Kubernetes cluster via the official Helm charts is a fully supported and increasingly common approach.
 
 > [!IMPORTANT]
 > However, SonarQube Server is a self-hosted application, and its successful deployment relies heavily on robust internal support and specific expertise. While the Helm chart simplifies the process, managing a stateful application like SonarQube (which relies on databases and Elasticsearch) within the dynamic Kubernetes environment introduces complexities. Organizations should carefully consider alternatives if they lack sufficient Kubernetes experience or internal support resources. It is crucial to note that the Sonar team's support is focused on the application and the Helm chart itself; they cannot assist with complex Kubernetes infrastructure issues that are only tangentially related to SonarQube Server. Therefore, the decision to install SQS on K8s should be based on the organization's capacity to manage the underlying Kubernetes environment.
