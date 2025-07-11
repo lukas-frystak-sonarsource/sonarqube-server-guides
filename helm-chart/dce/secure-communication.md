@@ -83,7 +83,7 @@ Below are example commands for generating the CA and certificate using the tool 
   - Enter the password for the `http.p12` file (twice) --> choose a password. *This value is needed in the Helm chart.*
   - What filename should be used for the outpit zip file? --> choose the desired path. E.g., default
 
-The `http.p12` is in the generated zip file: `<zip>/elasticsearch/http.p12`. The file has to be extracted and renamed to `elastic-stack-ca.p12` (as the file name is currently hardcoded in the SQS Helm chart).
+The `http.p12` is in the generated zip file: `<zip>/elasticsearch/http.p12`. The file has to be extracted and renamed to `elastic-stack-ca.p12` (as the file name is currently hardcoded in the SonarQube Server Helm chart).
 
 ## Configure the Helm chart
 
