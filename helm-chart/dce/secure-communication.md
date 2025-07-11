@@ -23,7 +23,7 @@ While the configuration is documented in the SonarQube Server Helm chart reposit
 The hostnames of all ElasticSearch nodes and the corresponding service must be included in the certificate file that will be generated in the following step. The hostnames are used as input for the certificate generation.
 
 - If SonarQube is already running on Kubernetes cluster, you can get the search containers' host names by executing `hostname -f` in each of them. Additionally, it is needed to get the service name. An an example, the following PowerShell command gets the required values:
-  ```
+  ```ps1
   $sqNamespace = "sonarqube"; `
   $(kubectl get pods -n $sqNamespace -o json | ConvertFrom-Json).items.metadata.name `
   | Select-String "search" `
