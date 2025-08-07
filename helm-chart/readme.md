@@ -14,5 +14,7 @@ Table of contents:
   - [Download SonarQube images from a private repository](common/images-from-private-repo.md)
   - [Changing the admin's password from the Helm chart](common/change-admin-password.md)
 - `sonarqube` chart
+  - [Pod assignment to Kubernetes nodes](ee-de-cb/pod-to-node-assignment.md)
 - `sonarqube-dce` chart
   - [Secure the communication within the cluster](dce/secure-communication.md)
+  - [Pod assignment to Kubernetes nodes](dce/pod-to-node-assignment.md)
