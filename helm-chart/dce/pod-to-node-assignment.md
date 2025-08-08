@@ -9,7 +9,7 @@ When it comes to [assigning pods to nodes](https://kubernetes.io/docs/concepts/s
   - Node affinity is a property of Pods that *attracts* them to a set of nodes (either as a preference or a hard requirement).
   - Affinity provides more control over the selection logic but increases complexity.
 - [Taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
-  - *Taints* are the opposite opposite of *affinity* - they allow a node to repel a set of pods.
+  - *Taints* are the opposite of *affinity* - they allow a node to repel a set of pods.
 
 For more detail, refer to the official Kubernetes documentation: [Scheduling, Preemption and Eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/).
 
@@ -44,7 +44,7 @@ nodeSelector:
   sonarqube: "true"
 ```
 
-#### Example 2: Assign SonarQube Server search pods to dedicated nodes  `nodeSelector`
+#### Example 2: Assign SonarQube Server search pods to dedicated nodes using `nodeSelector`
 
 Label the required nodes. For example, this can be done with `kubectl` like this:
 ```sh
