@@ -4,9 +4,9 @@
 
 | Phase | Items | Importance |
 |-------|-------|------------|
-| [Before First Startup](#before-first-startup) | 1-3 items | ✅ Essential for startup |
-| [After First Startup](#after-first-startup) | 6 categories | ⚙️ Production readiness |
-| [UI Configuration](#ui-configuration) | 8 sections | 🔧 Fine-tuning & integrations |
+| [Before First Startup](#-before-first-startup) | 1-3 items | ✅ Essential for startup |
+| [After First Startup](#%EF%B8%8F-after-first-startup) | 6 categories | ⚙️ Production readiness |
+| [UI Configuration](#%EF%B8%8F-ui-configuration) | 8 sections | 🔧 Fine-tuning & integrations |
 
 ---
 
