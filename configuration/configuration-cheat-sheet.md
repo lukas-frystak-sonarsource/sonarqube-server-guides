@@ -17,14 +17,14 @@
 
 **For the impatient: Get SonarQube running in 3 steps:**
 
-☐ **Step 1**: Set database connection in `sonar.properties`:
+[ ] **Step 1**: Set database connection in `sonar.properties`:
 ```properties
 sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
 sonar.jdbc.username=sonarqube
 sonar.jdbc.password=yourpassword
 ```
 
-☐ **Step 2**: Start SonarQube Server
+[ ] **Step 2**: Start SonarQube Server
 
 ☐ **Step 3**: Login at `http://localhost:9000` (admin/admin → change password)
 
