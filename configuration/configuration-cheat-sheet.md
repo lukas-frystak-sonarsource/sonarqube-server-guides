@@ -1,0 +1,1 @@
+# SonarQube Server configuration cheat sheet
