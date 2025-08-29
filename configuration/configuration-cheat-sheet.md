@@ -48,7 +48,7 @@ This section covers optional `sonar.properties` configuration that can be added 
 
 #### Access Log Pattern for Reverse Proxy
 
-If SonarQube is behind a reverse proxy, configure the access log pattern to display the correct remote IP address:
+If SonarQube is behind a reverse proxy (strongly recommended), configure the access log pattern to display the correct remote IP address:
 
 ```properties
 sonar.web.accessLogs.pattern=%i{X-Forwarded-For} %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}" "%reqAttribute{ID}"
@@ -95,4 +95,47 @@ This section covers the configuration of various settings through the SonarQube 
 
 ### UI Configuration Steps
 
+All configuration in this section is performed on the Administration page and requires **global administrator** privileges.
+
+#### Configuration > General Settings > General
+
+- **Set server base URL**: In the General tab, configure "Server base URL" (`sonar.core.serverBaseURL`)
+- **Change default branch name**: If your organization doesn't default to `main`, update the "Default main branch name" (`sonar.projectCreation.mainBranchName`)
+- **(Optional) Disable inherited rules deactivation**: Disable "Enable deactivation of inherited rules" option. This is the safer option early in your SonarQube journey, as it prevents users with 'Administer Quality Profiles' permission from deactivating inherited rules in quality profiles.
+
+#### Configuration > General Settings > Security
+
+- **(Optional) Set token lifetime**: Configure "Maximum allowed lifetime" for tokens to prevent users from having tokens that never expire
+- **(Optional) Restrict project permission management**: Disable "Enable permission management for project administrators" if you plan on having tight control over project permissions. Once disabled, only global administrators can control project-level permissions
+- **Never disable "Force user authentication"** - This should always remain enabled
+
+#### Configuration > General Settings > New Code
+
+- **Set default New Code configuration**: Set to "Number of days" and configure to 30 days. This means that by default, the New Code will be set to the last three weeks on all projects (can be changed per project as needed)
+
+#### Configuration > General Settings > AI Code Fix
+
+- **Enable AI Code Fix**: Review the [Terms and Conditions](https://www.sonarsource.com/legal/ai-codefix-terms/) first, then enable this feature
+
+#### Projects > Management
+
+- **Set default project visibility**: Configure default project visibility to "Private" (important for security and access control)
+
+#### Projects > Background Tasks
+
+- **Configure compute engine workers**: If you provisioned additional computing resources and configured the JVM parameters appropriately, adjust the number of compute engine workers. See the [Performance Related Parameters](#performance-related-parameters) section for JVM configuration details.
+
+### Configuring Integrations with External Systems
+
+#### Email Notifications Configuration
+
 [Content to be added]
+
+#### Authentication
+
+[Content to be added]
+
+#### DevOps Platform Integration
+
+[Content to be added]
+
