@@ -2,21 +2,26 @@
 
 ## 📋 Configuration Checklist Overview
 
-| Phase | Status | Items | Required |
-|-------|--------|-------|----------|
-| [Before First Startup](#before-first-startup) | ☐ | 1-3 items | ✅ Required |
-| [After First Startup](#after-first-startup) | ☐ | 6 categories | ⚪ Optional |
-| [UI Configuration](#ui-configuration) | ☐ | 8 sections | ⚪ Optional |
+| Phase | Items | Importance |
+|-------|-------|------------|
+| [Before First Startup](#before-first-startup) | 1-3 items | ✅ Essential for startup |
+| [After First Startup](#after-first-startup) | 6 categories | ⚙️ Production readiness |
+| [UI Configuration](#ui-configuration) | 8 sections | 🔧 Fine-tuning & integrations |
 
 ---
 
 ## 📖 Deployment Methods Reference
 
+This guide focuses on `sonar.properties` configuration relevant to zip file installation on a VM. However, the same configuration steps apply to other deployment methods:
+
+- **Docker**: Configuration parameters are set using corresponding environment variables (e.g., `sonar.jdbc.url` becomes `SONAR_JDBC_URL`). See the [official documentation](https://docs.sonarsource.com/sonarqube-server/latest/server-installation/system-properties/common-properties/) for details.
+- **Kubernetes**: Parameters should be set in the `sonar.properties` section of your deployment configuration.
+
 | Method | Configuration | Notes |
 |--------|---------------|-------|
 | **ZIP Installation** | Edit `sonar.properties` | Focus of this guide |
 | **Docker** | Environment variables | `sonar.jdbc.url` → `SONAR_JDBC_URL` |
-| **Kubernetes** | `sonar.properties` section | In deployment config |
+| **Kubernetes** | `sonar.properties` section | In deployment config (`values.yml`) |
 
 📚 **More info**: [System properties configuration methods](https://docs.sonarsource.com/sonarqube-server/latest/server-installation/system-properties/configuration-methods/)
 
