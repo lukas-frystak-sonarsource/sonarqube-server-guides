@@ -4,9 +4,9 @@ This repository provides a collection of guides and practical examples designed 
 
 ## Table of Contents
 
-- [Configuration](configuration/) - General SonarQube Server configuration guides
+- Configuration
   - [SonarQube Server configuration cheat sheet](configuration/configuration-cheat-sheet.md)
-- [Helm Chart Guides](helm-chart/) - Installation and configuration guides for deploying SonarQube Server on Kubernetes using Helm charts
+- [Helm Chart Guides](helm-chart/)
   - [Common Guides](helm-chart/common/) - General guidelines applicable to all SonarQube deployments
     - [When to deploy SonarQube Server on Kubernetes (and when not)](helm-chart/common/when-to-deploy-on-k8s.md)
     - [Connect SonarQube to an external database](helm-chart/common/connect-external-db.md)
