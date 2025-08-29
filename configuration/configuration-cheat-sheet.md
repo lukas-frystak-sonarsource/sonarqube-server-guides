@@ -1,166 +1,246 @@
-# SonarQube Server configuration cheat sheet
+# SonarQube Server Configuration Cheat Sheet
 
-This page contains the essential configuration steps needed to get started with SonarQube Server. The configuration process is divided into three main phases:
+> **⚡ Quick Start**: Need the absolute minimum? Jump to [30-Second Setup](#30-second-setup)
 
-- [Before First Startup](#before-first-startup) - Essential properties before first startup
-- [After First Startup](#after-first-startup) - Optional properties after first startup  
-- [UI Configuration](#ui-configuration) - UI-based configuration
+## 📋 Configuration Checklist Overview
 
-### Important Notes
+| Phase | Status | Items | Required |
+|-------|--------|-------|----------|
+| [30-Second Setup](#30-second-setup) | ☐ | 3 items | ✅ Essential |
+| [Before First Startup](#before-first-startup) | ☐ | 1-3 items | ✅ Required |
+| [After First Startup](#after-first-startup) | ☐ | 6 categories | ⚪ Optional |
+| [UI Configuration](#ui-configuration) | ☐ | 8 sections | ⚪ Optional |
 
-#### Deployment Methods
-This guide focuses on `sonar.properties` configuration relevant to zip file installation on a VM. However, the same configuration steps apply to other deployment methods:
+---
 
-- **Docker**: Configuration parameters are set using corresponding environment variables (e.g., `sonar.jdbc.url` becomes `SONAR_JDBC_URL`). See the [official documentation](https://docs.sonarsource.com/sonarqube-server/latest/server-installation/system-properties/common-properties/) for details.
-- **Kubernetes**: Parameters should be set in the `sonar.properties` section of your deployment configuration.
+## 🚀 30-Second Setup
 
-For more detail, see [System properties configuration methods](https://docs.sonarsource.com/sonarqube-server/latest/server-installation/system-properties/configuration-methods/).
+**For the impatient: Get SonarQube running in 3 steps:**
 
-#### UI Configuration Automation
-While this guide covers manual UI configuration, note that these settings can also be automated using the SonarQube Server API.
-
-#### Data Center Edition
-The configuration options in the `sonar.properties` file in this guide apply to the Data Center Edition of SonarQube Server, but additional configuration items are needed for such deployments beyond what's covered here.
-
-## Before First Startup
-
-This section covers the essential `sonar.properties` configuration that **must** be completed before starting SonarQube Server for the first time.
-
-### Required sonar.properties Configuration
-
-The only essential configuration before first startup is establishing the connection to an external database. This requires configuring three key parameters:
-
-#### Database Connection Parameters
-
-- **`sonar.jdbc.url`** - The JDBC URL that specifies the database connection string, including the database server location, port, and database name.
-
-- **`sonar.jdbc.username`** - The database username for authentication. Only required when using SQL user authentication.
-
-- **`sonar.jdbc.password`** - The database password for authentication. Only required when using SQL user authentication.
-
-**Note:** The username and password parameters are only needed when using SQL user authentication. Alternative authentication methods (such as integrated authentication on Windows or certificate-based authentication) may not require these credentials.
-
-If SonarQube Server successfully connects to the database, it generally starts without issues. The UI will then be accessible on port 9000 (default) and it will be possible to use it with the default administration account: username `admin`, password `admin`. The password must be changed on the first login.
-
-> [!TIP]
-> If you don't expect the database connection to change while continuing the installation/configuration effort, get the *Server ID* of your SonarQube Server instance and request a license as described in the [documentation](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/license-administration/#requesting-license).
-
-## After First Startup
-
-This section covers optional `sonar.properties` configuration that can be added after the initial startup to fine-tune your SonarQube Server installation. **These changes require a server restart.**
-
-### Optional sonar.properties Configuration
-
-#### Access Log Pattern for Reverse Proxy
-
-If SonarQube runs behind a reverse proxy (strongly recommended), configure the access log pattern to display the correct remote IP address:
-
+☐ **Step 1**: Set database connection in `sonar.properties`:
 ```properties
+sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+sonar.jdbc.username=sonarqube
+sonar.jdbc.password=yourpassword
+```
+
+☐ **Step 2**: Start SonarQube Server
+
+☐ **Step 3**: Login at `http://localhost:9000` (admin/admin → change password)
+
+---
+
+## 📖 Deployment Methods Reference
+
+| Method | Configuration | Notes |
+|--------|---------------|-------|
+| **ZIP Installation** | Edit `sonar.properties` | Focus of this guide |
+| **Docker** | Environment variables | `sonar.jdbc.url` → `SONAR_JDBC_URL` |
+| **Kubernetes** | `sonar.properties` section | In deployment config |
+
+📚 **More info**: [System properties configuration methods](https://docs.sonarsource.com/sonarqube-server/latest/server-installation/system-properties/configuration-methods/)
+
+> **💡 Pro Tips:**
+> - UI configuration can be automated via SonarQube Server API
+> - Data Center Edition needs additional config beyond this guide
+> - Get your Server ID early and request a license if DB connection won't change
+
+---
+
+## ✅ Before First Startup
+
+> **🎯 Goal**: Configure database connection so SonarQube can start
+
+### Checklist: Required sonar.properties Configuration
+
+☐ **Configure database connection** (choose authentication method):
+
+#### Option A: SQL User Authentication
+```properties
+sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+sonar.jdbc.username=your_username
+sonar.jdbc.password=your_password
+```
+
+#### Option B: Alternative Authentication (Windows/Certificate)
+```properties
+sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+# No username/password needed
+```
+
+### Database Connection Parameters Reference
+
+| Parameter | Purpose | Required |
+|-----------|---------|----------|
+| `sonar.jdbc.url` | Database connection string (server, port, database name) | ✅ Always |
+| `sonar.jdbc.username` | Database user for authentication | ⚪ SQL auth only |
+| `sonar.jdbc.password` | Database password for authentication | ⚪ SQL auth only |
+
+### Post-Startup Verification
+
+☐ **Verify startup**: SonarQube should start without database connection errors  
+☐ **Access UI**: Navigate to `http://localhost:9000` (or your configured port)  
+☐ **First login**: Use `admin`/`admin` and change password immediately
+
+> **💡 Next Step**: Get your Server ID and [request a license](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/license-administration/#requesting-license) if database connection is stable
+
+---
+
+## ⚙️ After First Startup
+
+> **🎯 Goal**: Fine-tune your SonarQube installation for production use  
+> **⚠️ Important**: All changes require server restart
+
+### Configuration Checklist
+
+#### ☐ Reverse Proxy Setup
+```properties
+# Configure access log pattern for correct IP logging
 sonar.web.accessLogs.pattern=%i{X-Forwarded-For} %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}" "%reqAttribute{ID}"
 ```
 
-#### Performance Related Parameters
+#### ☐ Performance Tuning (Enterprise Instances)
 
-On larger, enterprise instances, the default JVM configuration is usually insufficient. The following parameters must be uncommented and updated:
+| Parameter | Purpose | Example |
+|-----------|---------|---------|
+| `sonar.web.javaOpts` | Web server JVM options | `-Xmx2g -Xms2g` |
+| `sonar.ce.javaOpts` | Compute engine JVM options | `-Xmx4g -Xms4g` |
+| `sonar.search.javaOpts` | Search process JVM options | `-Xmx2g -Xms2g` |
 
-- **`sonar.web.javaOpts`** - JVM options for the web server process
-- **`sonar.ce.javaOpts`** - JVM options for the compute engine process  
-- **`sonar.search.javaOpts`** - JVM options for the search process
-
-**Example:** To increase the heap space allocated to the compute engine process, increase the `sonar.ce.javaOpts` from `-Xmx2g` to `-Xmx4g` to allow running with 2 compute engine workers.
-
-#### HTTP Proxy Configuration
-
-If a proxy is required for SonarQube Server to reach external services, configure these parameters:
-
-- `http.proxyHost`
-- `http.proxyPort`
-- `https.proxyHost`
-- `https.proxyPort`
-- `http.auth.ntlm.domain`
-- `http.proxyUser`
-- `http.proxyPassword`
-- `http.nonProxyHosts`
-
-#### LDAP Authentication
-
-If LDAP authentication is to be configured, set the security realm and configure LDAP parameters:
-
+**Example**: Increase compute engine heap for 2 workers:
 ```properties
-sonar.security.realm=LDAP
+sonar.ce.javaOpts=-Xmx4g -Xms4g
 ```
 
-Then configure the relevant `ldap.*` parameters. See the [LDAP documentation](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/authentication/ldap/) for more details.
+#### ☐ HTTP Proxy Configuration (if needed)
 
-## UI Configuration
+| Parameter | Purpose |
+|-----------|---------|
+| `http.proxyHost` | HTTP proxy hostname |
+| `http.proxyPort` | HTTP proxy port |
+| `https.proxyHost` | HTTPS proxy hostname |
+| `https.proxyPort` | HTTPS proxy port |
+| `http.auth.ntlm.domain` | NTLM domain |
+| `http.proxyUser` | Proxy username |
+| `http.proxyPassword` | Proxy password |
+| `http.nonProxyHosts` | Hosts to bypass proxy |
 
-This section covers the configuration of various settings through the SonarQube Server web interface after the server is running.
+#### ☐ LDAP Authentication Setup
 
-### UI Configuration Steps
+```properties
+# Enable LDAP authentication
+sonar.security.realm=LDAP
 
-All configuration in this section is performed on the Administration page and requires **global administrator** privileges.
+# Configure LDAP parameters (see documentation for details)
+ldap.url=ldap://your-ldap-server:389
+# ... additional ldap.* parameters
+```
 
-**Note:** All configuration fields in the UI are searchable, making it easy to find specific settings.
+📚 **Reference**: [LDAP documentation](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/authentication/ldap/)
 
-#### Configuration > General Settings > General
+---
 
-- **Set server base URL**: In the General tab, configure "Server base URL" (`sonar.core.serverBaseURL`)
-- **Change default branch name**: If your organization doesn't default to `main`, update the "Default main branch name" (`sonar.projectCreation.mainBranchName`)
-- **(Optional) Disable inherited rules deactivation**: Disable "Enable deactivation of inherited rules" option. This is the safer option early in your SonarQube journey, as it prevents users with 'Administer Quality Profiles' permission from deactivating inherited rules in quality profiles.
+## 🖥️ UI Configuration
 
-#### Configuration > General Settings > Security
+> **🎯 Goal**: Configure SonarQube through the web interface  
+> **🔐 Required**: Global administrator privileges  
+> **💡 Tip**: All UI fields are searchable
 
-- **(Optional) Set token lifetime**: Configure "Maximum allowed lifetime" for tokens to prevent users from having tokens that never expire
-- **(Optional) Restrict project permission management**: Disable "Enable permission management for project administrators" if you plan on having tight control over project permissions. Once disabled, only global administrators can control project-level permissions
-- **Never disable "Force user authentication"** - This should always remain enabled
+### Essential Configuration Checklist
 
-#### Configuration > General Settings > New Code
+#### ☐ General Settings → General
+**Path**: Administration > Configuration > General Settings > General
 
-- **Set default New Code configuration**: Set to "Number of days" and configure to 30 days. This means that by default, the New Code will be set to the last month on all projects (can be changed per project as needed)
+| Setting | Parameter | Action |
+|---------|-----------|---------|
+| ☐ Server base URL | `sonar.core.serverBaseURL` | Set your server's public URL |
+| ☐ Default branch name | `sonar.projectCreation.mainBranchName` | Change if not using `main` |
+| ☐ Inherited rules | "Enable deactivation of inherited rules" | **Disable** for safety |
 
-#### Configuration > General Settings > AI Code Fix
+#### ☐ General Settings → Security  
+**Path**: Administration > Configuration > General Settings > Security
 
-- **Enable AI Code Fix**: Review the [Terms and Conditions](https://www.sonarsource.com/legal/ai-codefix-terms/) first, then enable this feature
+| Setting | Action | Recommendation |
+|---------|--------|----------------|
+| ☐ Token lifetime | Configure "Maximum allowed lifetime" | Prevent never-expiring tokens |
+| ☐ Project permissions | "Enable permission management for project administrators" | **Disable** for tight control |
+| ☐ Force authentication | "Force user authentication" | **Never disable** |
 
-#### Projects > Management
+#### ☐ General Settings → New Code
+**Path**: Administration > Configuration > General Settings > New Code
 
-- **Set default project visibility**: Configure default project visibility to "Private" (important for security and access control)
+☐ **Set default New Code**: Configure to "Number of days" → **30 days**
 
-#### Projects > Background Tasks
+#### ☐ General Settings → AI Code Fix
+**Path**: Administration > Configuration > General Settings > AI Code Fix
 
-- **Configure compute engine workers**: If you provisioned additional computing resources and configured the JVM parameters appropriately, adjust the number of compute engine workers. See the [Performance Related Parameters](#performance-related-parameters) section for JVM configuration details.
+☐ **Review [Terms and Conditions](https://www.sonarsource.com/legal/ai-codefix-terms/)** first  
+☐ **Enable AI Code Fix** if accepted
 
-### Configuring Integrations with External Systems
+#### ☐ Projects → Management
+**Path**: Administration > Projects > Management
 
-#### Email Notifications Configuration
+☐ **Set default project visibility**: Configure to **"Private"** (security best practice)
 
-Configure email notifications on **Administration > Configuration > General Settings > Email Notification**.
+#### ☐ Projects → Background Tasks
+**Path**: Administration > Projects > Background Tasks
 
-#### Authentication
+☐ **Configure compute engine workers**: Adjust based on [Performance Related Parameters](#-after-first-startup)
 
-Configure external authentication providers on **Administration > Configuration > General Settings > Authentication**.
+### Integration Configuration Checklist
 
-Available authentication options:
-- **SAML** - Single Sign-On authentication
-- **GitHub** - GitHub OAuth authentication
-- **GitLab** - GitLab OAuth authentication  
-- **Bitbucket** - Bitbucket OAuth authentication
+#### ☐ Email Notifications
+**Path**: Administration > Configuration > General Settings > Email Notification
 
-#### DevOps Platform Integration
+☐ Configure SMTP settings for email notifications
 
-Configure DevOps platform integrations on **Administration > Configuration > General Settings > DevOps Platform Integrations**.
+#### ☐ Authentication Providers
+**Path**: Administration > Configuration > General Settings > Authentication
 
-Available platform integrations:
-- **GitHub** - GitHub integration for pull request decoration and repository onboarding
-- **GitLab** - GitLab integration for merge request decoration and repository onboarding
-- **Bitbucket** - Bitbucket Server and Cloud integration for pull request decoration and repository onboarding
-- **Azure DevOps** - Azure DevOps integration for pull request decoration and repository onboarding
+| Provider | Purpose |
+|----------|---------|
+| ☐ SAML | Single Sign-On authentication |
+| ☐ GitHub | GitHub OAuth authentication |
+| ☐ GitLab | GitLab OAuth authentication |
+| ☐ Bitbucket | Bitbucket OAuth authentication |
 
-## Next Steps
+#### ☐ DevOps Platform Integrations
+**Path**: Administration > Configuration > General Settings > DevOps Platform Integrations
 
-After completing the basic configuration of your SonarQube Server, the next steps involve:
+| Platform | Features |
+|----------|----------|
+| ☐ GitHub | PR decoration + repository onboarding |
+| ☐ GitLab | MR decoration + repository onboarding |
+| ☐ Bitbucket | PR decoration + repository onboarding (Server & Cloud) |
+| ☐ Azure DevOps | PR decoration + repository onboarding |
 
-- **Permission and Access Management** - Configure user permissions and access controls
-- **Project Onboarding and Analysis** - Set up projects for analysis and onboard development teams
+---
 
-**Note:** These topics are beyond the scope of this configuration cheat sheet.
+## 🚀 Next Steps Checklist
+
+After completing the basic configuration:
+
+☐ **Permission and Access Management**  
+   - Configure user permissions and access controls
+
+☐ **Project Onboarding and Analysis**  
+   - Set up projects for analysis  
+   - Onboard development teams
+
+> **📝 Note**: These topics are covered in separate guides beyond this configuration cheat sheet.
+
+---
+
+## 📋 Configuration Completion Tracker
+
+Track your progress through the configuration phases:
+
+| Phase | Items Completed | Status |
+|-------|----------------|--------|
+| **30-Second Setup** | __ / 3 | ☐ |
+| **Before First Startup** | __ / 3 | ☐ |
+| **After First Startup** | __ / 4 | ☐ |
+| **UI Configuration - Essential** | __ / 6 | ☐ |
+| **UI Configuration - Integrations** | __ / 3 | ☐ |
+
+**🎉 Total Progress**: __ / 19 items completed
