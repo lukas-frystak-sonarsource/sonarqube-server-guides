@@ -112,6 +112,8 @@ sonar.ce.javaOpts=-Xmx4G -Xms128m -XX:+HeapDumpOnOutOfMemoryError
 
 #### ☐ LDAP Authentication Setup
 
+If LDAP authentication is to be configured, set the security realm and configure LDAP parameters:
+
 ```properties
 # Enable LDAP authentication
 sonar.security.realm=LDAP
