@@ -5,8 +5,8 @@
 | Phase | Items | Importance |
 |-------|-------|------------|
 | [Before First Startup](#-before-first-startup) | 1-3 items | ✅ Essential for startup |
-| [After First Startup](#%EF%B8%8F-after-first-startup) | 6 categories | ⚙️ Production readiness |
-| [UI Configuration](#%EF%B8%8F-ui-configuration) | 8 sections | 🔧 Fine-tuning & integrations |
+| [After First Startup](#️-after-first-startup) | 6 categories | ⚙️ Production readiness |
+| [UI Configuration](#️-ui-configuration) | 8 sections | 🔧 Fine-tuning & integrations |
 
 ---
 
@@ -198,7 +198,7 @@ Configure external authentication providers as needed. Multiple providers can be
 | GitLab | GitLab OAuth authentication | **Recommended**: Offers additional convenient features |
 | Bitbucket | Bitbucket OAuth authentication | Basic OAuth integration |
 
-> **💡 Tip**: GitHub and GitLab authentication providers offer more convenient features beyond basic OAuth, making them preferred choices when available and when one of them can be the only authentication method to rely on (i.e., all SonarQube Server are on GitHub/GitLab).
+> **💡 Tip**: GitHub and GitLab authentication providers offer more convenient features beyond basic OAuth, making them preferred choices when available and when one of them can be the only authentication method to rely on (i.e., all SonarQube Server users are on GitHub/GitLab).
 
 #### ☐ DevOps Platform Integrations
 **Path**: Administration > Configuration > General Settings > DevOps Platform Integrations
