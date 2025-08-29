@@ -44,13 +44,13 @@ If SonarQube Server successfully connects to the database, it generally starts w
 
 ## After First Startup
 
-This section covers optional `sonar.properties` configuration that can be added after the initial startup to fine-tune your SonarQube Server installation. These changes require a server restart.
+This section covers optional `sonar.properties` configuration that can be added after the initial startup to fine-tune your SonarQube Server installation. **These changes require a server restart.**
 
 ### Optional sonar.properties Configuration
 
 #### Access Log Pattern for Reverse Proxy
 
-If SonarQube is behind a reverse proxy (strongly recommended), configure the access log pattern to display the correct remote IP address:
+If SonarQube runs behind a reverse proxy (strongly recommended), configure the access log pattern to display the correct remote IP address:
 
 ```properties
 sonar.web.accessLogs.pattern=%i{X-Forwarded-For} %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}" "%reqAttribute{ID}"
@@ -70,16 +70,14 @@ On larger, enterprise instances, the default JVM configuration is usually insuff
 
 If a proxy is required for SonarQube Server to reach external services, configure these parameters:
 
-```properties
-http.proxyHost
-http.proxyPort
-https.proxyHost
-https.proxyPort
-http.auth.ntlm.domain
-http.proxyUser
-http.proxyPassword
-http.nonProxyHosts
-```
+- `http.proxyHost`
+- `http.proxyPort`
+- `https.proxyHost`
+- `https.proxyPort`
+- `http.auth.ntlm.domain`
+- `http.proxyUser`
+- `http.proxyPassword`
+- `http.nonProxyHosts`
 
 #### LDAP Authentication
 
@@ -98,6 +96,8 @@ This section covers the configuration of various settings through the SonarQube 
 ### UI Configuration Steps
 
 All configuration in this section is performed on the Administration page and requires **global administrator** privileges.
+
+**Note:** All configuration fields in the UI are searchable, making it easy to find specific settings.
 
 #### Configuration > General Settings > General
 
