@@ -1,32 +1,12 @@
 # SonarQube Server Configuration Cheat Sheet
 
-> **⚡ Quick Start**: Need the absolute minimum? Jump to [30-Second Setup](#30-second-setup)
-
 ## 📋 Configuration Checklist Overview
 
 | Phase | Status | Items | Required |
 |-------|--------|-------|----------|
-| [30-Second Setup](#30-second-setup) | ☐ | 3 items | ✅ Essential |
 | [Before First Startup](#before-first-startup) | ☐ | 1-3 items | ✅ Required |
 | [After First Startup](#after-first-startup) | ☐ | 6 categories | ⚪ Optional |
 | [UI Configuration](#ui-configuration) | ☐ | 8 sections | ⚪ Optional |
-
----
-
-## 🚀 30-Second Setup
-
-**For the impatient: Get SonarQube running in 3 steps:**
-
-- [ ] **Step 1**: Set database connection in `sonar.properties`:
-```properties
-sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
-sonar.jdbc.username=sonarqube
-sonar.jdbc.password=yourpassword
-```
-
-[ ] **Step 2**: Start SonarQube Server
-
-☐ **Step 3**: Login at `http://localhost:9000` (admin/admin → change password)
 
 ---
 
@@ -228,19 +208,3 @@ After completing the basic configuration:
    - Onboard development teams
 
 > **📝 Note**: These topics are covered in separate guides beyond this configuration cheat sheet.
-
----
-
-## 📋 Configuration Completion Tracker
-
-Track your progress through the configuration phases:
-
-| Phase | Items Completed | Status |
-|-------|----------------|--------|
-| **30-Second Setup** | __ / 3 | ☐ |
-| **Before First Startup** | __ / 3 | ☐ |
-| **After First Startup** | __ / 4 | ☐ |
-| **UI Configuration - Essential** | __ / 6 | ☐ |
-| **UI Configuration - Integrations** | __ / 3 | ☐ |
-
-**🎉 Total Progress**: __ / 19 items completed
