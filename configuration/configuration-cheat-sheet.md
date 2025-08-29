@@ -42,7 +42,7 @@ The only essential configuration before first startup is establishing the connec
 
 If SonarQube Server successfully connects to the database, it generally starts without issues. The UI will then be accessible on port 9000 (default) and it will be possible to use it with the default administration account: username `admin`, password `admin`. The password must be changed on the first login.
 
-> [!NOTE]  
+> [!TIP]
 > If you don't expect the database connection to change while continuing the installation/configuration effort, get the *Server ID* of your SonarQube Server instance and request a license as described in the [documentation](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/license-administration/#requesting-license).
 
 ## After First Startup
