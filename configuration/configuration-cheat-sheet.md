@@ -46,7 +46,48 @@ This section covers optional `sonar.properties` configuration that can be added 
 
 ### Optional sonar.properties Configuration
 
-[Content to be added]
+#### Access Log Pattern for Reverse Proxy
+
+If SonarQube is behind a reverse proxy, configure the access log pattern to display the correct remote IP address:
+
+```properties
+sonar.web.accessLogs.pattern=%i{X-Forwarded-For} %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}" "%reqAttribute{ID}"
+```
+
+#### Performance Related Parameters
+
+On larger, enterprise instances, the default JVM configuration is usually insufficient. The following parameters must be uncommented and updated:
+
+- **`sonar.web.javaOpts`** - JVM options for the web server process
+- **`sonar.ce.javaOpts`** - JVM options for the compute engine process  
+- **`sonar.search.javaOpts`** - JVM options for the search process
+
+**Example:** To increase the heap space allocated to the compute engine process, increase the `sonar.ce.javaOpts` from `-Xmx2g` to `-Xmx4g` to allow running with 2 compute engine workers.
+
+#### HTTP Proxy Configuration
+
+If a proxy is required for SonarQube Server to reach external services, configure these parameters:
+
+```properties
+http.proxyHost
+http.proxyPort
+https.proxyHost
+https.proxyPort
+http.auth.ntlm.domain
+http.proxyUser
+http.proxyPassword
+http.nonProxyHosts
+```
+
+#### LDAP Authentication
+
+If LDAP authentication is to be configured, set the security realm and configure LDAP parameters:
+
+```properties
+sonar.security.realm=LDAP
+```
+
+Then configure the relevant `ldap.*` parameters. See the [LDAP documentation](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/authentication/ldap/) for more details.
 
 ## UI Configuration
 
