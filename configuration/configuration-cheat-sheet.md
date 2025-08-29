@@ -42,14 +42,14 @@ This guide focuses on `sonar.properties` configuration relevant to zip file inst
 
 #### Option A: SQL User Authentication
 ```properties
-sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+sonar.jdbc.url=jdbc:postgresql://db-server:5432/sonarqube
 sonar.jdbc.username=your_username
 sonar.jdbc.password=your_password
 ```
 
-#### Option B: Alternative Authentication (Windows/Certificate)
+#### Option B: Integrated Authentication
 ```properties
-sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+sonar.jdbc.url=jdbc:sqlserver://db-server:1433;databaseName=sonarqube;integratedSecurity=true
 # No username/password needed
 ```
 
@@ -64,7 +64,7 @@ sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
 ### Post-Startup Verification
 
 ☐ **Verify startup**: SonarQube should start without database connection errors  
-☐ **Access UI**: Navigate to `http://localhost:9000` (or your configured port)  
+☐ **Access UI**: Navigate to `http://localhost:9000` (or use VM DNS name or IP for browser access)  
 ☐ **First login**: Use `admin`/`admin` and change password immediately
 
 > **💡 Next Step**: Get your Server ID and [request a license](https://docs.sonarsource.com/sonarqube-server/latest/instance-administration/license-administration/#requesting-license) if database connection is stable
@@ -86,15 +86,15 @@ sonar.web.accessLogs.pattern=%i{X-Forwarded-For} %l %u [%t] "%r" %s %b "%i{Refer
 
 #### ☐ Performance Tuning (Enterprise Instances)
 
-| Parameter | Purpose | Example |
-|-----------|---------|---------|
-| `sonar.web.javaOpts` | Web server JVM options | `-Xmx2g -Xms2g` |
-| `sonar.ce.javaOpts` | Compute engine JVM options | `-Xmx4g -Xms4g` |
-| `sonar.search.javaOpts` | Search process JVM options | `-Xmx2g -Xms2g` |
+| Parameter | Purpose |
+|-----------|---------|
+| `sonar.web.javaOpts` | Web server JVM options |
+| `sonar.ce.javaOpts` | Compute engine JVM options |
+| `sonar.search.javaOpts` | Search process JVM options |
 
-**Example**: Increase compute engine heap for 2 workers:
+**Example**: Increase compute engine heap for 2 workers (increase `Xmx` from default `2G` to `4G`):
 ```properties
-sonar.ce.javaOpts=-Xmx4g -Xms4g
+sonar.ce.javaOpts=-Xmx4G -Xms128m -XX:+HeapDumpOnOutOfMemoryError
 ```
 
 #### ☐ HTTP Proxy Configuration (if needed)
@@ -139,8 +139,8 @@ ldap.url=ldap://your-ldap-server:389
 | Setting | Parameter | Action |
 |---------|-----------|---------|
 | ☐ Server base URL | `sonar.core.serverBaseURL` | Set your server's public URL |
-| ☐ Default branch name | `sonar.projectCreation.mainBranchName` | Change if not using `main` |
-| ☐ Inherited rules | "Enable deactivation of inherited rules" | **Disable** for safety |
+| ☐ Default main branch name | `sonar.projectCreation.mainBranchName` | Change if not using `main` |
+| ☐ Inherited rules | "Enable deactivation of inherited rules" (`sonar.qualityProfiles.allowDisableInheritedRules`) | **Disable** for safety |
 
 #### ☐ General Settings → Security  
 **Path**: Administration > Configuration > General Settings > Security
@@ -156,11 +156,10 @@ ldap.url=ldap://your-ldap-server:389
 
 ☐ **Set default New Code**: Configure to "Number of days" → **30 days**
 
-#### ☐ General Settings → AI Code Fix
-**Path**: Administration > Configuration > General Settings > AI Code Fix
+#### ☐ General Settings → Advanced Security
+**Path**: Administration > Configuration > General Settings > Advanced Security
 
-☐ **Review [Terms and Conditions](https://www.sonarsource.com/legal/ai-codefix-terms/)** first  
-☐ **Enable AI Code Fix** if accepted
+☐ **Enable Advanced Security features** (if included in your license)
 
 #### ☐ Projects → Management
 **Path**: Administration > Projects > Management
@@ -170,7 +169,13 @@ ldap.url=ldap://your-ldap-server:389
 #### ☐ Projects → Background Tasks
 **Path**: Administration > Projects > Background Tasks
 
-☐ **Configure compute engine workers**: Adjust based on [Performance Related Parameters](#-after-first-startup)
+☐ **Configure compute engine workers**: If additional computing resources were provisioned and the JVM parameters configured appropriately, adjust the number of compute engine workers for parallel background task (analysis) processing on the SonarQube Server.
+
+#### ☐ General Settings → AI Code Fix
+**Path**: Administration > Configuration > General Settings > AI Code Fix
+
+☐ **Review [Terms and Conditions](https://www.sonarsource.com/legal/ai-codefix-terms/)** first  
+☐ **Enable AI Code Fix** if accepted
 
 ### Integration Configuration Checklist
 
@@ -182,15 +187,21 @@ ldap.url=ldap://your-ldap-server:389
 #### ☐ Authentication Providers
 **Path**: Administration > Configuration > General Settings > Authentication
 
-| Provider | Purpose |
-|----------|---------|
-| ☐ SAML | Single Sign-On authentication |
-| ☐ GitHub | GitHub OAuth authentication |
-| ☐ GitLab | GitLab OAuth authentication |
-| ☐ Bitbucket | Bitbucket OAuth authentication |
+Configure external authentication providers as needed. Multiple providers can be enabled simultaneously.
+
+| Provider | Purpose | Notes |
+|----------|---------|-------|
+| ☐ SAML | Single Sign-On authentication | Enterprise SSO integration |
+| ☐ GitHub | GitHub OAuth authentication | **Recommended**: Offers additional convenient features |
+| ☐ GitLab | GitLab OAuth authentication | **Recommended**: Offers additional convenient features |
+| ☐ Bitbucket | Bitbucket OAuth authentication | Basic OAuth integration |
+
+> **💡 Tip**: GitHub and GitLab authentication providers offer more convenient features beyond basic OAuth, making them preferred choices when available.
 
 #### ☐ DevOps Platform Integrations
 **Path**: Administration > Configuration > General Settings > DevOps Platform Integrations
+
+Configure platform integrations as needed. Multiple platforms can be integrated simultaneously to support diverse development environments.
 
 | Platform | Features |
 |----------|----------|
