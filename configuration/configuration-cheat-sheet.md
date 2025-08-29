@@ -17,7 +17,7 @@
 
 **For the impatient: Get SonarQube running in 3 steps:**
 
-[ ] **Step 1**: Set database connection in `sonar.properties`:
+- [ ] **Step 1**: Set database connection in `sonar.properties`:
 ```properties
 sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
 sonar.jdbc.username=sonarqube
