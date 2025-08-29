@@ -140,7 +140,7 @@ ldap.url=ldap://your-ldap-server:389
 
 | Setting | Parameter | Action |
 |---------|-----------|---------|
-| ☐ Server base URL | `sonar.core.serverBaseURL` | Set your server's public URL |
+| ☐ Server base URL | `sonar.core.serverBaseURL` | Set your server's URL |
 | ☐ Default main branch name | `sonar.projectCreation.mainBranchName` | Change if not using `main` |
 | ☐ Inherited rules | "Enable deactivation of inherited rules" (`sonar.qualityProfiles.allowDisableInheritedRules`) | **Disable** for safety |
 
@@ -149,14 +149,14 @@ ldap.url=ldap://your-ldap-server:389
 
 | Setting | Action | Recommendation |
 |---------|--------|----------------|
-| ☐ Token lifetime | Configure "Maximum allowed lifetime" | Prevent never-expiring tokens |
-| ☐ Project permissions | "Enable permission management for project administrators" | **Disable** for tight control |
+| ☐ Token lifetime | Configure "Maximum allowed lifetime" | Prevent never-expiring tokens (optional) |
+| ☐ Project permissions | "Enable permission management for project administrators" | **Disable** for tight control (optional) |
 | ☐ Force authentication | "Force user authentication" | **Never disable** |
 
 #### ☐ General Settings → New Code
 **Path**: Administration > Configuration > General Settings > New Code
 
-☐ **Set default New Code**: Configure to "Number of days" → **30 days**
+**Set default New Code**: Configure to "Number of days" → **30 days**
 
 #### ☐ General Settings → Advanced Security
 **Path**: Administration > Configuration > General Settings > Advanced Security
