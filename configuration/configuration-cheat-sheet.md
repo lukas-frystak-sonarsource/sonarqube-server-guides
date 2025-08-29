@@ -40,6 +40,8 @@ The only essential configuration before first startup is establishing the connec
 
 **Note:** The username and password parameters are only needed when using SQL user authentication. Alternative authentication methods (such as integrated authentication on Windows or certificate-based authentication) may not require these credentials.
 
+If SonarQube Server successfully connects to the database, it generally starts without issues. The UI will then be accessible on port 9000 (default) and it will be possible to use with the default administration account: username `admin`, password `admin`. The password must be changed on the first login.
+
 ## After First Startup
 
 This section covers optional `sonar.properties` configuration that can be added after the initial startup to fine-tune your SonarQube Server installation. These changes require a server restart.
@@ -129,13 +131,33 @@ All configuration in this section is performed on the Administration page and re
 
 #### Email Notifications Configuration
 
-[Content to be added]
+Configure email notifications on **Administration > Configuration > General Settings > Email Notification**.
 
 #### Authentication
 
-[Content to be added]
+Configure external authentication providers on **Administration > Configuration > General Settings > Authentication**.
+
+Available authentication options:
+- **SAML** - Single Sign-On authentication
+- **GitHub** - GitHub OAuth authentication
+- **GitLab** - GitLab OAuth authentication  
+- **Bitbucket** - Bitbucket OAuth authentication
 
 #### DevOps Platform Integration
 
-[Content to be added]
+Configure DevOps platform integrations on **Administration > Configuration > General Settings > DevOps Platform Integrations**.
 
+Available platform integrations:
+- **GitHub** - GitHub integration for pull request decoration and repository onboarding
+- **GitLab** - GitLab integration for merge request decoration and repository onboarding
+- **Bitbucket** - Bitbucket Server and Cloud integration for pull request decoration and repository onboarding
+- **Azure DevOps** - Azure DevOps integration for pull request decoration and repository onboarding
+
+## Next Steps
+
+After completing the basic configuration of your SonarQube Server, the next steps involve:
+
+- **Permission and Access Management** - Configure user permissions and access controls
+- **Project Onboarding and Analysis** - Set up projects for analysis and onboard development teams
+
+**Note:** These topics are beyond the scope of this configuration cheat sheet.
