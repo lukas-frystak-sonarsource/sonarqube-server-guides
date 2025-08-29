@@ -166,7 +166,7 @@ ldap.url=ldap://your-ldap-server:389
 #### ☐ Projects → Management
 **Path**: Administration > Projects > Management
 
-**Set default project visibility**: Configure to **"Private"** (security best practice)
+**Set default project visibility**: Configure to **"Private"** ⚠️ (security best practice)
 
 #### ☐ Projects → Background Tasks
 **Path**: Administration > Projects > Background Tasks
@@ -198,7 +198,7 @@ Configure external authentication providers as needed. Multiple providers can be
 | GitLab | GitLab OAuth authentication | **Recommended**: Offers additional convenient features |
 | Bitbucket | Bitbucket OAuth authentication | Basic OAuth integration |
 
-> **💡 Tip**: GitHub and GitLab authentication providers offer more convenient features beyond basic OAuth, making them preferred choices when available.
+> **💡 Tip**: GitHub and GitLab authentication providers offer more convenient features beyond basic OAuth, making them preferred choices when available and when one of them can be the only authentication method to rely on (i.e., all SonarQube Server are on GitHub/GitLab).
 
 #### ☐ DevOps Platform Integrations
 **Path**: Administration > Configuration > General Settings > DevOps Platform Integrations
@@ -224,5 +224,3 @@ After completing the basic configuration:
 ☐ **Project Onboarding and Analysis**  
    - Set up projects for analysis  
    - Onboard development teams
-
-> **📝 Note**: These topics are covered in separate guides beyond this configuration cheat sheet.
