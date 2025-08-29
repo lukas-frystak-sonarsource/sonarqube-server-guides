@@ -140,18 +140,18 @@ ldap.url=ldap://your-ldap-server:389
 
 | Setting | Parameter | Action |
 |---------|-----------|---------|
-| ☐ Server base URL | `sonar.core.serverBaseURL` | Set your server's URL |
-| ☐ Default main branch name | `sonar.projectCreation.mainBranchName` | Change if not using `main` |
-| ☐ Inherited rules | "Enable deactivation of inherited rules" (`sonar.qualityProfiles.allowDisableInheritedRules`) | **Disable** for safety |
+| Server base URL | `sonar.core.serverBaseURL` | Set your server's URL |
+| Default main branch name | `sonar.projectCreation.mainBranchName` | Change if not using `main` |
+| Inherited rules | "Enable deactivation of inherited rules" (`sonar.qualityProfiles.allowDisableInheritedRules`) | **Disable** for safety |
 
 #### ☐ General Settings → Security  
 **Path**: Administration > Configuration > General Settings > Security
 
 | Setting | Action | Recommendation |
 |---------|--------|----------------|
-| ☐ Token lifetime | Configure "Maximum allowed lifetime" | Prevent never-expiring tokens (optional) |
-| ☐ Project permissions | "Enable permission management for project administrators" | **Disable** for tight control (optional) |
-| ☐ Force authentication | "Force user authentication" | **Never disable** |
+| Token lifetime | Configure "Maximum allowed lifetime" | Prevent never-expiring tokens (optional) |
+| Project permissions | "Enable permission management for project administrators" | **Disable** for tight control (optional) |
+| Force authentication | "Force user authentication" | **Never disable** |
 
 #### ☐ General Settings → New Code
 **Path**: Administration > Configuration > General Settings > New Code
@@ -161,30 +161,30 @@ ldap.url=ldap://your-ldap-server:389
 #### ☐ General Settings → Advanced Security
 **Path**: Administration > Configuration > General Settings > Advanced Security
 
-☐ **Enable Advanced Security features** (if included in your license)
+**Enable Advanced Security features** (if included in your license)
 
 #### ☐ Projects → Management
 **Path**: Administration > Projects > Management
 
-☐ **Set default project visibility**: Configure to **"Private"** (security best practice)
+**Set default project visibility**: Configure to **"Private"** (security best practice)
 
 #### ☐ Projects → Background Tasks
 **Path**: Administration > Projects > Background Tasks
 
-☐ **Configure compute engine workers**: If additional computing resources were provisioned and the JVM parameters configured appropriately, adjust the number of compute engine workers for parallel background task (analysis) processing on the SonarQube Server.
+**Configure compute engine workers**: If additional computing resources were provisioned and the JVM parameters configured appropriately, adjust the number of compute engine workers for parallel background task (analysis) processing on the SonarQube Server.
 
 #### ☐ General Settings → AI Code Fix
 **Path**: Administration > Configuration > General Settings > AI Code Fix
 
-☐ **Review [Terms and Conditions](https://www.sonarsource.com/legal/ai-codefix-terms/)** first  
-☐ **Enable AI Code Fix** if accepted
+**Review [Terms and Conditions](https://www.sonarsource.com/legal/ai-codefix-terms/)** first  
+**Enable AI Code Fix** if accepted
 
 ### Integration Configuration Checklist
 
 #### ☐ Email Notifications
 **Path**: Administration > Configuration > General Settings > Email Notification
 
-☐ Configure SMTP settings for email notifications
+Configure SMTP settings for email notifications
 
 #### ☐ Authentication Providers
 **Path**: Administration > Configuration > General Settings > Authentication
@@ -193,10 +193,10 @@ Configure external authentication providers as needed. Multiple providers can be
 
 | Provider | Purpose | Notes |
 |----------|---------|-------|
-| ☐ SAML | Single Sign-On authentication | Enterprise SSO integration |
-| ☐ GitHub | GitHub OAuth authentication | **Recommended**: Offers additional convenient features |
-| ☐ GitLab | GitLab OAuth authentication | **Recommended**: Offers additional convenient features |
-| ☐ Bitbucket | Bitbucket OAuth authentication | Basic OAuth integration |
+| SAML | Single Sign-On authentication | Enterprise SSO integration |
+| GitHub | GitHub OAuth authentication | **Recommended**: Offers additional convenient features |
+| GitLab | GitLab OAuth authentication | **Recommended**: Offers additional convenient features |
+| Bitbucket | Bitbucket OAuth authentication | Basic OAuth integration |
 
 > **💡 Tip**: GitHub and GitLab authentication providers offer more convenient features beyond basic OAuth, making them preferred choices when available.
 
@@ -207,10 +207,10 @@ Configure platform integrations as needed. Multiple platforms can be integrated 
 
 | Platform | Features |
 |----------|----------|
-| ☐ GitHub | PR decoration + repository onboarding |
-| ☐ GitLab | MR decoration + repository onboarding |
-| ☐ Bitbucket | PR decoration + repository onboarding (Server & Cloud) |
-| ☐ Azure DevOps | PR decoration + repository onboarding |
+| GitHub | PR decoration + repository onboarding |
+| GitLab | MR decoration + repository onboarding |
+| Bitbucket | PR decoration + repository onboarding (Server & Cloud) |
+| Azure DevOps | PR decoration + repository onboarding |
 
 ---
 
