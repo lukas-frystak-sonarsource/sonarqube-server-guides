@@ -18,3 +18,4 @@ Table of contents:
 - `sonarqube-dce` chart
   - [Secure the communication within the cluster](dce/secure-communication.md)
   - [Pod assignment to Kubernetes nodes](dce/pod-to-node-assignment.md)
+  - [Download plugins using self-signed certificate and basic authentication](dce/download-plugins-self-signed-cert.md)
