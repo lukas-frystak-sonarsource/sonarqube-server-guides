@@ -17,4 +17,4 @@ This repository provides a collection of guides and practical examples designed 
   - [SonarQube DCE Chart](helm-chart/dce/) - Guides specific to the `sonarqube-dce` Helm chart
     - [Secure the communication within the cluster](helm-chart/dce/secure-communication.md)
     - [Pod assignment to Kubernetes nodes](helm-chart/dce/pod-to-node-assignment.md)
-
+    - [Download plugins using self-signed certificate and basic authentication](helm-chart/dce/download-plugins-self-signed-cert.md)
