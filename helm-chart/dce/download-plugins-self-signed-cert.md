@@ -4,6 +4,9 @@ The helm chart currently doesn't support downloading plugins while using self-si
 
 The custom implementation follows the native plugin installation feature. However, as it is a custom implementation, it will rely on `extraInitContainers`, `extraVolumes`, and `extraVolumeMounts`.
 
+> [!NOTE]
+> As with many things related to Kubernetes, there are many different ways of doing everything. This page provides complete instructions, but should still be treated as an example. The steps needs to be adapted to the specific environment where the steps are being applied.
+
 **Implementation steps:**
 - Native plugins download and installation must be disabled. i.e., do not set the `applicationNodes.plugins` parameter.
 - Two secrets must be created: one from the self-signed certificate and one for basic authentication based on the `.netrc` file.
