@@ -43,11 +43,16 @@ The manifest can be applied directly from its GitHub URL as shown in the example
     kubectl apply -f https://raw.githubusercontent.com/lukas-frystak-sonarsource/sonarqube-server-guides/refs/heads/main/examples/kubernetes/manifests/sqs-db-copy-tool-job.yaml -n <namespace>
     ```
 
-4. Monitor the job progress:
+4. While waiting for the migration to finish, you can monitor the job progress:
 
     ```bash
     kubectl get jobs -n <namespace>
-    kubectl logs job/sqs-db-copy-tool -n <namespace>
+    kubectl logs job/sqs-db-copy-job -n <namespace>
+    ```
+5. Look for the message indicating that the copy has finished succesfully
+
+    ```
+    kubectl logs job/sqs-db-copy-job -n sqcopytool | grep "THE COPY HAS FINISHED SUCCESSFULLY"
     ```
 
 ## Configuration
@@ -61,13 +66,13 @@ As the database connection parameters come from a secret, there isn't anything t
 Check the job logs for detailed error messages:
 
 ```bash
-kubectl logs job/sqs-db-copy-tool -f
+kubectl logs job/sqs-db-copy-job -f -n <namespace>
 ```
 
 For additional troubleshooting information, you can also check the job events:
 
 ```bash
-kubectl describe job sqs-db-copy-tool
+kubectl describe job sqs-db-copy-job -n <namespace>
 ```
 
 ## Cleanup
@@ -75,8 +80,8 @@ kubectl describe job sqs-db-copy-tool
 The Job will be automatically removed 24 hours after finishing. However, It can also be cleared up manually:
 
 ```bash
-kubectl delete job sqs-db-copy-tool
-kubectl delete secret sqs-db-copy-params
+kubectl delete job sqs-db-copy-job  -n <namespace>
+kubectl delete secret sqs-db-copy-params  -n <namespace>
 ```
 
 Or just delete the dedicated namespace:

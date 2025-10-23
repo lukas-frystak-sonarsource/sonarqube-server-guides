@@ -86,3 +86,13 @@ spec:
           capabilities:
             drop:
             - ALL
+        
+        # Volume mounts for writable directories
+        volumeMounts:
+        - name: tmp-dir
+          mountPath: /tmp
+      
+      # Volumes
+      volumes:
+      - name: tmp-dir
+        emptyDir: {}
