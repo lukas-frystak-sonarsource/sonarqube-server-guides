@@ -4,7 +4,7 @@ When SonarQube Server is already running on a Kubernetes cluster and you need to
 
 This guide explains how to run the SonarQube Server Database Copy Tool on Kubernetes using a Job manifest.
 
-This page focuses only on the execution of the DB Copy Tool. For more information on the complete migration process, refer to the [DB vendor migration plan](db-copy-plan.md).
+This page focuses only on the execution of the DB Copy Tool. For more information on the complete migration process, refer to the [Databse vendor migration plan](db-copy-plan.md).
 
 ## Prerequisites
 
