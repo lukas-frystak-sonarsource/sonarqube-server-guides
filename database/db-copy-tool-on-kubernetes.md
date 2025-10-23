@@ -1,10 +1,10 @@
-# Running the SQS DB Copy Tool on Kubernetes
+# Running the SonarQube Server DB Copy Tool on Kubernetes
 
 When SonarQube Server is already running on a Kubernetes cluster and you need to migrate between different database vendors, it can be convenient to run the [SonarQube DB Copy Tool](https://docs.sonarsource.com/sonarqube-server/server-update-and-maintenance/maintenance/sonarqube-db-copy-tool) directly on the Kubernetes cluster. This environment typically already has access to the existing (*"source"*) database and can be configured to access the new (*"target"*) database. By running the DB Copy Tool directly on the cluster, you can avoid setting up a separate VM for the migration.
 
 This guide explains how to run the SonarQube Server Database Copy Tool on Kubernetes using a Job manifest.
 
-This page focuses only on the execution of the DB Copy Tool. For more information on the complete migration process, refer to [TBD](#TODO add link).
+This page focuses only on the execution of the DB Copy Tool. For more information on the complete migration process, refer to the [DB vendor migration plan](db-copy-plan.md).
 
 ## Prerequisites
 
