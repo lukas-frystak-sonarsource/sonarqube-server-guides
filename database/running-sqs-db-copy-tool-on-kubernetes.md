@@ -16,9 +16,9 @@ This page focuses only on the execution of the DB Copy Tool. For more informatio
 
 ## Kubernetes Manifest
 
-The complete Kubernetes Job manifest for the SQS DB Copy Tool can be found in this repository: [`sqs-db-copy-tool-job.yaml`](../examples/kubernetes/manifests/sqs-db-copy-tool-job.yaml). Always review the manifest before running it.
+The complete Kubernetes Job manifest for the SonarQube Server DB Copy Tool can be found in this file: [`sqs-db-copy-tool-job.yaml`](../examples/kubernetes/manifests/sqs-db-copy-tool-job.yaml). Always review the manifest before running it.
 
-The manifest can be applied directly from GitHub as shown in the example below, but it can also be downloaded locally (and customized) if needed.
+The manifest can be applied directly from its GitHub URL as shown in the example below, but it can also be downloaded locally (and customized) if needed.
 
 ## Usage
 
@@ -64,7 +64,7 @@ Check the job logs for detailed error messages:
 kubectl logs job/sqs-db-copy-tool -f
 ```
 
-For persistent debugging, you can also check the job events:
+For additional troubleshooting information, you can also check the job events:
 
 ```bash
 kubectl describe job sqs-db-copy-tool
