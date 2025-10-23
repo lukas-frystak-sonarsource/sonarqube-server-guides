@@ -47,11 +47,9 @@ spec:
           
           echo "Starting bash commands execution..."
 
-          # Create and navigate to sqs-db-copy directory.
-          # This directory is created in the user's home directory to make
-          # sure we have the right permissions on the directory.
-          mkdir $HOME/sqs-db-copy
-          cd $HOME/sqs-db-copy
+          # Create and navigate to sqs-db-copy directory in /tmp
+          mkdir /tmp/sqs-db-copy
+          cd /tmp/sqs-db-copy
           
           echo "Downloading sonar-db-copy tool..."
           curl "https://binaries.sonarsource.com/CommercialDistribution/sonar-db-copy/sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar" -o sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar
