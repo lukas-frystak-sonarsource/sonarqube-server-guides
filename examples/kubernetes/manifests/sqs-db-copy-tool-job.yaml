@@ -1,0 +1,98 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sqs-db-copy-job
+  labels:
+    app: sqs-db-copy-job
+    component: batch-processing
+spec:
+  # Clean up finished jobs after 24 hours (86400 seconds)
+  ttlSecondsAfterFinished: 86400
+  
+  # No retries on failure
+  backoffLimit: 0
+  
+  # Job will be marked as failed if it takes longer than 1 hour
+  activeDeadlineSeconds: 3600
+  
+  template:
+    metadata:
+      labels:
+        app: sqs-db-copy-job
+        component: batch-processing
+    spec:
+      # Don't restart the pod on failure
+      restartPolicy: Never
+      
+      # Disable service account token automounting for security
+      automountServiceAccountToken: false
+      
+      containers:
+      - name: sqs-db-copy
+        # This is the same base image as used by the SonarQube Server images
+        image: eclipse-temurin:21-jre-noble
+        
+        # Environment variables from Secret
+        envFrom:
+        - secretRef:
+            name: sqs-db-copy-params
+        
+        # Bash commands to execute
+        command: ["/bin/bash"]
+        args:
+        - -c
+        - |
+          # Exit on error, undefined vars, pipe failures
+          set -euo pipefail
+          
+          echo "Starting bash commands execution..."
+
+          # Create and navigate to sqs-db-copy directory in /tmp
+          mkdir /tmp/sqs-db-copy
+          cd /tmp/sqs-db-copy
+          
+          echo "Downloading sonar-db-copy tool..."
+          curl "https://binaries.sonarsource.com/CommercialDistribution/sonar-db-copy/sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar" -o sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar
+
+          echo "Running sonar-db-copy with configured parameters..."
+          java -jar sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar \
+            -urlSrc "$SOURCE_DB_URL" \
+            -userSrc "$SOURCE_DB_USERNAME" \
+            -pwdSrc "$SOURCE_DB_PASSWORD" \
+            -urlDest "$TARGET_DB_URL" \
+            -userDest "$TARGET_DB_USERNAME" \
+            -pwdDest "$TARGET_DB_PASSWORD"
+
+          echo "✅ All commands completed successfully!"
+        
+        # Resource configuration
+        resources:
+          requests:
+            memory: "2G"
+            cpu: "1"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "4G" 
+            cpu: "4"
+            ephemeral-storage: "2Gi"
+        
+        # Security context
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        
+        # Volume mounts for writable directories
+        volumeMounts:
+        - name: tmp-dir
+          mountPath: /tmp
+      
+      # Volumes
+      volumes:
+      - name: tmp-dir
+        emptyDir: {}

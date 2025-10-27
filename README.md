@@ -18,3 +18,8 @@ This repository provides a collection of guides and practical examples designed 
     - [Secure the communication within the cluster](helm-chart/dce/secure-communication.md)
     - [Pod assignment to Kubernetes nodes](helm-chart/dce/pod-to-node-assignment.md)
     - [Download plugins using self-signed certificate and basic authentication](helm-chart/dce/download-plugins-self-signed-cert.md)
+- [Database](database/) - Database-related operations and tools
+  - [Database vendor migration plan](database/db-copy-plan.md)
+  - [Running the SonarQube Server DB Copy Tool on Kubernetes](database/db-copy-tool-on-kubernetes.md)
+- [Examples](examples/) - Practical examples and reference implementations
+  - [Kubernetes Examples](examples/kubernetes/) - Kubernetes manifests and configurations
