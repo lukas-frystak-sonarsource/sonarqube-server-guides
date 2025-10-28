@@ -34,13 +34,12 @@ The migration process should be tested at least once to review, understand, and 
 
 ### Phase 2: Production Migration
 - Execute the validated migration process in production
-- Apply lessons learned from testing phase
 - Monitor and validate the production migration
 - Monitor the system for some time after completing the migration and bringing the SonarQube Server instance back online.
 
 ### Success Criteria
 A successful migration is defined by:
-- Complete data transfer with integrity validation
+- Complete data transfer without errors
 - SonarQube Server functionality verification
 - Performance meeting or exceeding the baseline performance of the original database
 - Minimal actual downtime within planned maintenance window
@@ -58,11 +57,11 @@ Before starting the testing migration, ensure you have:
 
 2. **Production data backup**: 
    - Complete database dump/backup from production
-   - Verified backup integrity
    - Backup restored to test environment
 
 3. **Network access**: 
    - Connectivity between migration tool and both source and target databases
+   - Optimal network positioning: Execute the DB Copy Tool from a location with low-latency connections to both databases (same data center, cloud region, or network segment)
    - Appropriate firewall rules and database permissions configured
 
 4. **Performance baseline**: 
@@ -74,9 +73,6 @@ Before starting the testing migration, ensure you have:
 #### DB Copy Tool Overview
 
 The DB Copy Tool is a Java command line application that enables data migration between different database engines. The tool connects to both the source database (original) and target database (new engine) to transfer all SonarQube Server data.
-
-> [!IMPORTANT]
-> During the DB Copy Tool execution, no SonarQube Server instances can be connected to either database (source or target).
 
 #### Step-by-Step Execution
 
@@ -97,12 +93,10 @@ The technical execution can be performed on:
 
 After the test migration:
 1. **Update SonarQube Server configuration**: Configure SonarQube Server to connect to the new target database
-2. **Clear Elasticsearch data**: Remove the contents of the Elasticsearch directory as described in [Forcing an Elasticsearch reindex](https://docs.sonarsource.com/sonarqube-server/server-update-and-maintenance/maintenance/reindexing#forcing-es-reindex)
-3. **Start SonarQube Server** connected to the new database
-4. **Verify functionality**: Test key features and user workflows
-5. **Data integrity checks**: Validate that all projects, users, and analysis data are present
-6. **Performance testing**: Compare performance against baseline metrics
-7. **Document findings**: Record any issues, performance changes, and process improvements
+2. **Start SonarQube Server** connected to the new database
+3. **Verify functionality**: Test key features and user workflows
+4. **Performance testing**: Compare performance against baseline metrics
+5. **Document findings**: Record any issues, performance changes, and process improvements
 
 ## Phase 2: Production Migration
 
@@ -128,7 +122,7 @@ The production migration follows the same technical steps validated in the testi
 3. **Stop SonarQube Server**: Gracefully shut down the production instance
 4. **Execute validated migration process**: Follow the exact steps tested in Phase 1
 5. **Monitor progress**: Track migration progress and watch for any issues
-6. **Validate migration**: Perform the same validation steps used in testing
+6. **Validate migration**: Verify that the DB copy tool finished succesfully. Verify there are not warnings or errors in the log.
 
 ### Go-live Procedures
 
@@ -146,12 +140,6 @@ After successful migration:
 - Compare against pre-migration baselines
 - Address any performance regressions identified
 
-### Troubleshooting Common Issues
-- Connection string configuration
-- Database permission issues
-- Performance tuning for the new database engine
-- Character encoding or collation differences
-
 ## Appendix
 
 ### Additional Resources
@@ -160,14 +148,11 @@ After successful migration:
 
 ### Rollback Strategy
 
-The rollback strategy is straightforward and relies on keeping the original/source database online and unchanged throughout the migration process. Since the original database remains in the exact state it was when SonarQube Server was last connected to it, no data restoration is required.
-
 To rollback to the original database, simply revert the SonarQube Server configuration changes made during migration, specifically the database connection string and authentication credentials.
 
 If issues are identified during or after migration:
 1. Stop the SonarQube Server instance connected to the new database
 2. Update SonarQube Server configuration to use the original database connection details
-3. Clear Elasticsearch data: Remove the contents of the Elasticsearch directory as described in [Forcing an Elasticsearch reindex](https://docs.sonarsource.com/sonarqube-server/server-update-and-maintenance/maintenance/reindexing#forcing-es-reindex)
-4. Start SonarQube Server - it will reconnect to the original database
-5. Validate that system functionality is restored
-6. Analyze the migration issues and plan remediation for the next migration attempt
+3. Start SonarQube Server - it will reconnect to the original database
+4. Validate that system functionality is restored
+5. Analyze the migration issues and plan remediation for the next migration attempt
