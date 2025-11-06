@@ -12,8 +12,9 @@ spec:
   # No retries on failure
   backoffLimit: 0
   
-  # Job will be marked as failed if it takes longer than 1 hour
-  activeDeadlineSeconds: 3600
+  # Job will be marked as failed if it takes longer than 12 hours
+  # We need to give the job enough time to complete for large databases.
+  activeDeadlineSeconds: 43200
   
   template:
     metadata:
