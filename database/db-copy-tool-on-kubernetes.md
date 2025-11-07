@@ -52,7 +52,7 @@ The manifest can be applied directly from its GitHub URL as shown in the example
 5. Look for the message indicating that the copy has finished succesfully
 
     ```
-    kubectl logs job/sqs-db-copy-job -n sqcopytool | grep "THE COPY HAS FINISHED SUCCESSFULLY"
+    kubectl logs job/sqs-db-copy-job -n <namespace> | grep "THE COPY HAS FINISHED SUCCESSFULLY"
     ```
 
 ## Configuration
