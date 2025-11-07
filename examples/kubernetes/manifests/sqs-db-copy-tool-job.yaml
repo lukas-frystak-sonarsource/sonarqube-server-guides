@@ -56,7 +56,13 @@ spec:
           curl "https://binaries.sonarsource.com/CommercialDistribution/sonar-db-copy/sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar" -o sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar
 
           echo "Running sonar-db-copy with configured parameters..."
-          java -jar sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar \
+
+          # After checking the max heap space without any specific configuration,
+          # using the `java -XX:+PrintFlagsFinal -version | grep MaxHeapSize` command,
+          # it seems the Xmx default is < 1G.
+          # To run it on against actual, production-size databases,
+          # the value must be larger.
+          java -Xmx3G -jar sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar \
             -urlSrc "$SOURCE_DB_URL" \
             -userSrc "$SOURCE_DB_USERNAME" \
             -pwdSrc "$SOURCE_DB_PASSWORD" \
@@ -69,7 +75,7 @@ spec:
         # Resource configuration
         resources:
           requests:
-            memory: "2G"
+            memory: "4G"
             cpu: "1"
             ephemeral-storage: "1Gi"
           limits:
