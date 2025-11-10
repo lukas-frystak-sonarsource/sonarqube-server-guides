@@ -62,7 +62,7 @@ spec:
           # it seems the Xmx default is < 1G.
           # To run it on against actual, production-size databases,
           # the value must be larger.
-          java -Xmx3G -jar sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar \
+          java -Xmx6G -jar sonar-db-copy-1.6.0.2092-jar-with-dependencies.jar \
             -urlSrc "$SOURCE_DB_URL" \
             -userSrc "$SOURCE_DB_USERNAME" \
             -pwdSrc "$SOURCE_DB_PASSWORD" \
@@ -75,11 +75,11 @@ spec:
         # Resource configuration
         resources:
           requests:
-            memory: "4G"
+            memory: "8G"
             cpu: "1"
             ephemeral-storage: "1Gi"
           limits:
-            memory: "4G" 
+            memory: "8G" 
             cpu: "4"
             ephemeral-storage: "2Gi"
         
