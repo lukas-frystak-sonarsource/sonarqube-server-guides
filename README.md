@@ -23,3 +23,8 @@ This repository provides a collection of guides and practical examples designed 
   - [Running the SonarQube Server DB Copy Tool on Kubernetes](database/db-copy-tool-on-kubernetes.md)
 - [Examples](examples/) - Practical examples and reference implementations
   - [Kubernetes Examples](examples/kubernetes/) - Kubernetes manifests and configurations
+
+## SonarQube Server Scripts
+
+For helpful scripts related to SonarQube Server administrative tasks, check out the sister repository: [sonarqube-server-scripts](https://github.com/lukas-frystak-sonarsource/sonarqube-server-scripts).
+
