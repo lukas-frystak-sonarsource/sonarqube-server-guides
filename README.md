@@ -4,6 +4,8 @@ This repository provides a collection of guides and practical examples designed 
 
 ## Table of Contents
 
+- [Onboarding](onboarding/)
+  - [Technical implementation steps](onboarding/onboarding-plan-technical.md)
 - Configuration
   - [SonarQube Server configuration cheat sheet](configuration/configuration-cheat-sheet.md)
 - [Helm Chart Guides](helm-chart/)
